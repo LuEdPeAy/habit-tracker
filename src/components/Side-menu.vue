@@ -3,7 +3,7 @@ const itemList = document.getElementsByClassName('list-menu') as HTMLCollectionO
 
 function toggleActive(event: Event) {
     for (let i = 0; i < itemList.length; i++) {
-        itemList[i].classList.remove('active-item');
+        itemList[i]!.classList.remove('active-item');
     }
     const element = event.currentTarget as HTMLElement;
     element.classList.add('active-item');

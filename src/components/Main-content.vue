@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import HabitCard from "./shared/components/habit-card.vue";
+
 const fecha = new Date();
 
 const anioActual = fecha.getFullYear();
@@ -14,9 +16,9 @@ const diaActualTexto = fecha.toLocaleString('es-MX', { weekday: 'long' });
     </div>
 
     <div class="cards">
-        <div class="habit-card">1</div>
-        <div class="habit-card">2</div>
-        <div class="habit-card">3</div>
+        <HabitCard title="Completado hoy" icon="bi bi-check-circle text-2xl text-indigo-700" />
+        <HabitCard title="Racha máxima" icon="bi bi-fire text-2xl text-orange-700" />
+        <HabitCard title="Esta semana" icon="bi bi-graph-up-arrow text-2xl text-emerald-700" />
     </div>
 </template>
 <style scoped>
@@ -26,7 +28,7 @@ const diaActualTexto = fecha.toLocaleString('es-MX', { weekday: 'long' });
     gap: 10em;
     margin-top: 2em;
     padding-left: 2em;
-    text-align: center;
+    padding-right: 2em;
 }
 
 .habit-card {
