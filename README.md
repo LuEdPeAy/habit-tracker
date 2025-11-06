@@ -1,54 +1,63 @@
-# habit-tacker
+# Habit Tracker 🎯
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
 
-## Recommended IDE Setup
+A modern habit tracking application built with Vue 3, TypeScript and Tailwind CSS. This application helps users track their daily habits and visualize their progress through an intuitive interface.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Recommended Browser Setup
+- Track multiple habits simultaneously
+- Progress visualization
+- Responsive design
+- Modern UI with Tailwind CSS
+- Real-time habit status updates
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Technologies Used
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Vue 3
+- TypeScript
+- Tailwind CSS
+- Bootstrap Icons
+- Vite
 
 ## Project Setup
 
-```sh
-pnpm install
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run unit tests
+npm run test
 ```
 
-### Compile and Hot-Reload for Development
+## Project Structure
 
-```sh
-pnpm dev
+```
+habit-tracker/
+├── src/
+│   ├── components/
+│   │   ├── Logo.vue
+│   │   ├── side-menu.vue
+│   │   ├── Main-content.vue
+│   │   └── shared/
+│   │       └── components/
+│   │           └── habit-card.vue
+│   ├── App.vue
+│   └── main.ts
+├── public/
+└── package.json
 ```
 
-### Type-Check, Compile and Minify for Production
+## License
 
-```sh
-pnpm build
-```
+This project is licensed under the MIT License - see the LICENSE file for details
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Author
 
-```sh
-pnpm test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+- **Luedpeay**
