@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
+import { ref, watch } from 'vue';
+
+defineProps<{
     id: number | string,
     color: string,
     title: string,
@@ -8,25 +10,23 @@ const props = defineProps<{
     tag: string,
 }>()
 
-function completedHabits(event: Event) {
-    // Lógica para contar hábitos completados
-    const checkbox = event.target as HTMLInputElement;
-    const habitTitle = document.getElementById('habit-title-' + props.id);
-    if (checkbox.checked) {
-        // Incrementar el contador de hábitos completados
-        habitTitle?.classList.add('habit-completed');
-    } else {
-        // Decrementar el contador de hábitos completados
-        habitTitle?.classList.remove('habit-completed');
-    }
-    return 0;
-}
+// Estado reactivo del checkbox
+const isCompleted = ref(false)
+
+// Referencia al título para aplicar clases
+const habitTitleRef = ref<HTMLElement | null>(null)
+
+//Watch para vigilar al elemento y reaccionar a los cambios
+watch(isCompleted, (checked) => {
+    habitTitleRef.value?.classList.toggle('habit-completed', checked)
+});
+
 </script>
 <template>
     <div class="habit-card mt-8">
-        <input type="checkbox" name="completeHabit" :id="'completeHabit' + id" class="mr-4" @click="completedHabits">
+        <input v-model="isCompleted" type="checkbox" name="completeHabit" :id="'completeHabit' + id" class="mr-4">
         <span :class="[color, 'inline-block', 'w-3', 'h-3', 'rounded-full', 'mr-2']"></span>
-        <p class="inline-block mb-2" :id="'habit-title-' + id">{{ title }}</p>
+        <p ref="habitTitleRef" class="inline-block mb-2" :id="'habit-title-' + id">{{ title }}</p>
         <p class="text-sm ml-8">{{ description }}</p>
         <div class="flex mt-4">
             <div>
