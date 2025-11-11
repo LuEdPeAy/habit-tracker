@@ -2,6 +2,9 @@
 import Logo from './components/Logo.vue';
 import sideMenu from './components/side-menu.vue';
 import MainContent from './components/Main-content.vue';
+import { initCatalogs } from './services/catalogsService';
+
+initCatalogs();
 </script>
 
 <template>

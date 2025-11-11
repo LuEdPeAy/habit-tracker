@@ -7,6 +7,8 @@ const titleHabit = ref('');
 const descriptionHabit = ref('');
 const frecuencyHabit = ref('');
 const tagHabit = ref('');
+const frecuencyCatalog = JSON.parse(localStorage.getItem('frecuencyCatalog') || '[]');
+const tagCatalog = JSON.parse(localStorage.getItem('tagCatalog') || '[]');
 
 defineProps<{
     nameProject: string,
@@ -93,6 +95,8 @@ function cleanInputs() {
 onMounted(() => window.addEventListener('keydown', handleKeydown))
 onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 
+console.log(frecuencyCatalog)
+
 </script>
 
 <template>
@@ -112,31 +116,41 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         <!-- Contenedor del modal -->
         <div ref="modalRef"
             class="bg-white rounded-lg shadow-lg p-6 w-96 transform transition-all duration-500 ease-out scale-100 translate-y-0">
-            <h2 class="text-xl font-semibold mb-4">Nuevo hábito</h2>
+            <h2 class="text-xl font-semibold mb-4">Crear nuevo hábito</h2>
             <div class="flex">
                 <form @submit.prevent="handleSubmitNewHabit">
-                    <label for="title">Titulo del hábito:</label>
-                    <input v-model="titleHabit" type="text" id="title" name="title"
-                        class="border border-gray-300 rounded w-full mb-4 p-2">
+                    <label for="title" class="text-sm font-medium text-stone-700">Nombre del
+                        hábito:</label>
+                    <input v-model="titleHabit" type="text" id="title" name="title" placeholder="Ej. Hacer ejercicio"
+                        class="bg-stone-100 border border-gray-300 focus:border-stone-400 focus:border-2 focus:outline-none focus:ring-0 rounded w-full mb-4 p-2  text-sm font-medium text-neutral-600">
 
-                    <label for="description">Descripción:</label>
-                    <textarea v-model="descriptionHabit" id="description" name="description"
-                        class="border border-gray-300 rounded w-full mb-4 p-2"></textarea>
+                    <label for="description" class="text-sm font-medium text-stone-700">Descripción:</label>
+                    <textarea v-model="descriptionHabit" id="description" name="description" rows="3"
+                        placeholder="Describe tu hábito"
+                        class="text-sm font-medium text-neutral-600 bg-stone-100 border border-gray-300 focus:border-stone-400 focus:border-2 focus:outline-none focus:ring-0 rounded w-full mb-4 p-2"></textarea>
 
-                    <label for="frequency">Frecuencia:</label>
-                    <input v-model="frecuencyHabit" type="text" id="frequency" name="frequency"
-                        class="border border-gray-300 rounded w-full mb-4 p-2">
-
-                    <label for="tag">Etiqueta:</label>
-                    <input v-model="tagHabit" type="text" id="tag" name="tag"
-                        class="border border-gray-300 rounded w-full mb-4 p-2">
-
+                    <label for="frequency" class="text-sm font-medium text-stone-700">Frecuencia:</label>
+                    <select v-model="frecuencyHabit" type="text" id="frequency" name="frequency"
+                        class="bg-stone-100 border border-gray-300 focus:border-stone-400 focus:border-2 focus:outline-none focus:ring-0 rounded w-full mb-4 p-2 text-sm font-medium text-neutral-600">
+                        <option v-for="frecuency in frecuencyCatalog" :key="frecuency.id" :value="frecuency.name">{{
+                            frecuency.name }}
+                        </option>
+                    </select>
+                    <label for="tag" class="text-sm font-medium text-stone-700">Categoría:</label>
+                    <select v-model="tagHabit" id="tag" name="tag"
+                        class="bg-stone-100 border border-gray-300 focus:border-stone-400 focus:border-2 focus:outline-none focus:ring-0 rounded w-full mb-4 p-2 text-sm font-medium text-neutral-600">
+                        <option value="1">Salud</option>
+                        <option value="2">Cognitivo</option>
+                        <option value="3">Estudio</option>
+                        <option value="4">Trabajo</option>
+                        <option value="5">Afectivo</option>
+                    </select>
                     <div class="flex justify-between">
                         <button type="submit"
-                            class="cursor-pointer bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-400">Agregar
+                            class="cursor-pointer bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-400">Guardar
                             hábito</button>
                         <button @click="showModal = false"
-                            class="cursor-pointer bg-orange-800 text-white px-4 py-2 rounded hover:bg-orange-600">Cerrar</button>
+                            class="cursor-pointer bg-orange-800 text-white px-4 py-2 rounded hover:bg-orange-600">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -146,6 +160,16 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 </template>
 
 <style scoped>
+input:focus,
+textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+textarea {
+    resize: none;
+}
+
 .pr-2em {
     padding-right: 2em;
 }
